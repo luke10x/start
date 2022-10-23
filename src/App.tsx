@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import { useForm } from "react-hook-form";
+import Header from './Header';
 
 export function StepToSelectTemplate() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -33,7 +33,7 @@ export function StepToSelectTemplate() {
           </svg>
         </div>
       </div>
-      <input type="submit" className="btn btn-blue dark:btn-blue" />
+      <input type="submit" className="btn btn-blue dark:btn-blue ml-1" />
       {errors.exampleRequired && <span>This field is required</span>}
       
     </form>
@@ -42,17 +42,18 @@ export function StepToSelectTemplate() {
 
 function App() {
   const [isDark, setDark] = useState<boolean>(false);
-  
   const toggleDarkMode = () => setDark(!isDark);
+
   return (
-    <div className={`App ${isDark ? 'dark' : ''} h-full`}>
-      <div className=" h-full  bg-white dark:bg-slate-900 ">
+    <div className={`App ${isDark ? 'dark' : 'light'} h-full`}>
+      <div className="h-full bg-white dark:bg-slate-900 p-2">
+        <Header />
+
         <button className="btn btn-blue" onClick={toggleDarkMode}>
           Switch to {isDark ? "light mode" : "dark mode"}
         </button>
-        
 
-        <div className="h-full rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+        <div className="rounded-lg px-6 py-8 ring-1 ring-slate-400/5 shadow-xl">
           <h1 className="text-3xl text-black dark:text-white font-bold underline">
             Start new app!
           </h1>
