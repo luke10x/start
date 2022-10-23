@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -33,22 +33,37 @@ export function StepToSelectTemplate() {
           </svg>
         </div>
       </div>
-
-      <input type="submit" />
+      <input type="submit" className="btn btn-blue dark:btn-blue" />
       {errors.exampleRequired && <span>This field is required</span>}
       
-      <input type="submit" />
     </form>
   );
 }
 
 function App() {
+  const [isDark, setDark] = useState<boolean>(false);
+  
+  const toggleDarkMode = () => setDark(!isDark);
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">
-        Start new app!
-      </h1>
-      <StepToSelectTemplate />
+    <div className={`App ${isDark ? 'dark' : ''} h-full`}>
+      <div className=" h-full  bg-white dark:bg-slate-900 ">
+        <button className="btn btn-blue" onClick={toggleDarkMode}>
+          Switch to {isDark ? "light mode" : "dark mode"}
+        </button>
+        
+
+        <div className="h-full rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+          <h1 className="text-3xl text-black dark:text-white font-bold underline">
+            Start new app!
+          </h1>
+          <StepToSelectTemplate />
+
+          <h3 className="text-slate-900 text-black dark:text-white mt-5 text-base font-medium tracking-tight">Writes Upside-Down</h3>
+          <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm">
+            The Zero Gravity Pen can be used to write in any orientation, including upside-down. It even works in outer space.
+          </p>
+        </div>
+      </div>
 
     </div>
   );
