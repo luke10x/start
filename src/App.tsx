@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
 import './App.css';
+import { Provider } from 'react-redux';
+
 
 import { useForm } from "react-hook-form";
 import Header from './Header';
+import { store } from './app/store';
+import { modeSelector } from './mode/slice';
+import { useAppSelector } from './app/hooks';
 
 export function StepToSelectTemplate() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -17,7 +21,6 @@ export function StepToSelectTemplate() {
     <form onSubmit={handleSubmit(onSubmit)}>
 
       <input defaultValue="test" {...register("example")} />
-      
       <div className="inline-block relative w-64">
         <select {...register("template")} 
           className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -40,33 +43,36 @@ export function StepToSelectTemplate() {
   );
 }
 
-function App() {
-  const [isDark, setDark] = useState<boolean>(false);
-  const toggleDarkMode = () => setDark(!isDark);
+
+function FirstPage() {
+  const colorTheme = useAppSelector(modeSelector);
 
   return (
-    <div className={`App ${isDark ? 'dark' : 'light'} h-full`}>
-      <div className="h-full bg-white dark:bg-slate-900 p-2">
-        <Header />
+    <div className={`${colorTheme} h-full`}>
+    <div className="h-full bg-white dark:bg-slate-900 p-2">
+      <Header />
 
-        <button className="btn btn-blue" onClick={toggleDarkMode}>
-          Switch to {isDark ? "light mode" : "dark mode"}
-        </button>
+      <div className="rounded-lg px-6 py-8 ring-1 ring-slate-800/5 dark:ring-slate-300/5 shadow-xl">
+        <h1 className="text-3xl text-black dark:text-white font-bold underline">
+          Start new app!
+        </h1>
+        <StepToSelectTemplate />
 
-        <div className="rounded-lg px-6 py-8 ring-1 ring-slate-400/5 shadow-xl">
-          <h1 className="text-3xl text-black dark:text-white font-bold underline">
-            Start new app!
-          </h1>
-          <StepToSelectTemplate />
-
-          <h3 className="text-slate-900 text-black dark:text-white mt-5 text-base font-medium tracking-tight">Writes Upside-Down</h3>
-          <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm">
-            The Zero Gravity Pen can be used to write in any orientation, including upside-down. It even works in outer space.
-          </p>
-        </div>
+        <h3 className="text-slate-900 text-black dark:text-white mt-5 text-base font-medium tracking-tight">Writes Upside-Down</h3>
+        <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm">
+          The Zero Gravity Pen can be used to write in any orientation, including upside-down. It even works in outer space.
+        </p>
       </div>
-
     </div>
+
+</div>
+)
+}
+function App() {
+
+  return (<Provider store={store}>
+      <FirstPage />
+    </Provider>
   );
 }
 
