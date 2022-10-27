@@ -51,7 +51,7 @@ const Mode: FC<ModeProps> = function () {
           </div>
           <div className="w-fit relative">
             <select 
-                className="block appearance-none w-full bg-white pl-7 pr-6 border border-gray-400 hover:border-gray-500  py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-black"
+                className="block appearance-none w-full color-my-input pl-7 pr-6 border py-2 rounded shadow leading-tight"
                 onChange={handleSelect}
                 value={mode}
               >

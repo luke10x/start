@@ -19,11 +19,11 @@ export function StepToSelectTemplate() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
 
-      <input defaultValue="test" {...register("example")} />
+      <input className="color-my-input" defaultValue="test" {...register("example")} />
       <div className="inline-block relative w-64">
         
         <select {...register("template")} 
-          className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+          className="block appearance-none w-full color-my-input border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
           <option value="female">CRA with Typescript and docker-compose</option>
           <option value="male">male</option>
           <option value="other">other</option>
@@ -48,7 +48,7 @@ function FirstPage() {
 
   return (
     <div className={`${colorTheme} h-full`}>
-    <div className="h-full bg-white dark:bg-slate-900 p-2">
+    <div className="h-full bg-my-solid p-2">
       <Header />
 
       <div className="rounded-lg px-6 py-8 ring-1 ring-slate-800/5 dark:ring-slate-300/5 shadow-xl">

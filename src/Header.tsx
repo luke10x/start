@@ -6,7 +6,7 @@ import { modeSelector } from "./mode/slice";
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const mode = useAppSelector(modeSelector);
+  const mode = useAppSelector(modeSelector).effectiveValue;
   return (
     <div className="text-black dark:text-white flex items-center justify-between pb-8">
       <a href="/" className="m-2 test-base"
@@ -24,7 +24,7 @@ export default function Header() {
             <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
           </div>
 
-          <div className={isNavOpen ? "showMenuNav bg-white dark:bg-slate-900" : "hideMenuNav"}>
+          <div className={isNavOpen ? "showMenuNav bg-my-semi" : "hideMenuNav"}>
             <div
               className="absolute top-0 right-0 px-8 py-8"
               onClick={() => setIsNavOpen(false)}
@@ -42,7 +42,7 @@ export default function Header() {
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </div>
-            <ul className="flex flex-col items-center justify-between min-h-[250px]">
+            <ul className="flex bg-my-solid flex-col items-center justify-between min-h-[250px]">
               <li className="border-b border-gray-400 my-8 uppercase">
                 <a href="/about">About</a>
               </li>
